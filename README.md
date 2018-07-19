@@ -7,6 +7,5 @@ The aim of this 3 day QCBS workshop will be to learn the standard bioinformatics
 
 #### Contact/questions: biome.workshop@gmail.com 
 
-#### Poster: [Link](https://github.com/alexiscarter/BIOME/blob/master/biome3_poster.pdf), feel free to share!
-
-[_DADA2_](https://benjjneb.github.io/dada2/index.html) and [_Phyloseq_](https://joey711.github.io/phyloseq/)
+#### Poster: [Link](https://github.com/alexiscarter/BIOME/blob/master/biome3_poster.pdf)
+Feel free to share!
