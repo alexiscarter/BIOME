@@ -8,3 +8,5 @@ The aim of this 3 day QCBS workshop will be to learn the standard bioinformatics
 Pre-registration: [quesitonnaire](https://docs.google.com/forms/d/1wp1WCI5MzewSUYRoM73Q8MY_sEqS8aCoyHBXXegd4H0/viewform?edit_requested=true)
 
 Contact/questions: biome.workshop@gmail.com
+
+![alt text][biome3_poster.pdf]
