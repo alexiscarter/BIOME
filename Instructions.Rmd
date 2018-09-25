@@ -60,7 +60,7 @@ packageStatus()
 
 # Installing the packages
 
-Now that you've got a brand new R, we're going to install DADA2 and Phyloseq. For that we must first install Bioconductor. 
+Now that you've got a brand new R, we're going to install DADA2 and Phyloseq. For that, we must first install Bioconductor as we're going to use one of its functions **biocLite**.
 
 ```{r Bioconductor, eval=FALSE}
 source("https://bioconductor.org/biocLite.R") # Installs Bionconductor
@@ -70,10 +70,18 @@ biocLite("phyloseq") # Installs phyloseq
 
 If this doesn't work you can try other methods. Methods for [DADA2](https://benjjneb.github.io/dada2/dada-installation.html) and [Phyloseq](https://joey711.github.io/phyloseq/install.html). <br>  If you don't succeed, we'll help you out on the first morning of the workshop.
 
+# Vignettes 
 
-# Getting information on a package or function
+Some packages include vignettes which are documents explaining the pipeline. Use the vignette() function 
+```{r vignette , eval=FALSE}
+library(dada2) # Loads the DADA2 package in the environment
+vignette("dada2")
+```
 
-On R Studio you can type ?'name' or help('name)
+
+# Getting specific information on a package or function
+
+On R Studio you can type ?'name' or help('name')
 For example:
 ```{r help , eval=FALSE}
 library(dada2) # Loads the DADA2 package in the environment
@@ -89,6 +97,18 @@ library(dada2) # Loads the DADA2 package in the environment
 ??filterAndTrim # One of DADA2's functions
 ```
 
-You can also see the source code of a function by typing its name.
+<center> 
+**This is particularly interesting to understand the parameters the function uses**
+</center>  
+<br>
+You can also see the source code of a function by just typing its name.
+```{r code , eval=FALSE}
+library(dada2) # Loads the DADA2 package in the environment
+filterAndTrim
+```
+<br>
+[Reference3](https://www.r-project.org/help.html)
 
 
+# Mike Love's Bioconductor "Refcard"
+[Refcard](https://github.com/mikelove/bioc-refcard)
