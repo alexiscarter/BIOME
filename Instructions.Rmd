@@ -160,9 +160,6 @@ However if you want to save multiple objects at a time you'll have to use **save
 
 *** 
 
-# Mike Love's Bioconductor "Refcard"
-[Refcard](https://github.com/mikelove/bioc-refcard)
-
 # Subsampling your data
 
 The more data you have, the slower your analysis are going to run. Therefore, it can be wise to subsample your data for this workshop. To do so, you can use the following script *on the terminal* (bash).  Concretely, it first downloads, the seqtk program. Place the program in the file where your fastq files are stored. Then you'll use a loop in order to subsample reads within each sample
@@ -181,3 +178,5 @@ done
 
 ```
 
+# Mike Love's Bioconductor "Refcard"
+[Refcard](https://github.com/mikelove/bioc-refcard)
