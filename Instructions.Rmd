@@ -5,15 +5,18 @@ date: "`r Sys.time()`"
 output: 
    html_document:  
     toc: true
+    theme: united
+    highlight: tango
 
 ---
 <br>
 
 # R Update
 
-We will mainly use two packages during this workshop: [DADA2](https://benjjneb.github.io/dada2/index.html) and [Phyloseq](https://joey711.github.io/phyloseq/index.html). It is recommanded that you update your R software in order that these packages run smoothly. Indeed, in order to install DADA2, you must have R version 3.5.0 or newer, and Bioconductor version 3.7. Using Bioconductor is the easiest way to install both DADA2 and Phyloseq.
+We will mainly use two packages during this workshop: [DADA2](https://benjjneb.github.io/dada2/index.html) and [Phyloseq](https://joey711.github.io/phyloseq/index.html). It is recommanded that you update your R software in order that these packages run smoothly. Indeed, in order to install DADA2, you must have R version **3.5.0 or newer**, and Bioconductor version 3.7. Using Bioconductor is the easiest way to install both DADA2 and Phyloseq.
 
 
+*** 
 
 ## For Windows users
 ```{r win, eval=FALSE}
@@ -22,6 +25,8 @@ library(installr)
 updateR()
 ```
 What is nice with this package is that it should migrate the packages you've installed on your older version of R to the folder corresponding to the newest version of R. It also updates all the packages you've installed from the CRAN repository. 
+
+*** 
 
 ## For Mac users
 ```{r mac, eval=FALSE}
@@ -49,14 +54,18 @@ version
 packageStatus()
 ```
 
+***
+
 ## For Unix users
 
 <center> 
 ![:)](https://media0.giphy.com/media/3oeSAz6FqXCKuNFX6o/giphy.gif)
 </center>  
-<br>
-[Reference1](http://bioinfo.umassmed.edu/bootstrappers/bootstrappers-courses/courses/rCourse/Additional_Resources/Updating_R.html) <br>
-[Reference2](https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/)
+<br> <br>
+[Reference 1](http://bioinfo.umassmed.edu/bootstrappers/bootstrappers-courses/courses/rCourse/Additional_Resources/Updating_R.html) <br>
+[Reference 2](https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/)
+
+*** 
 
 # Installing the packages
 
@@ -70,6 +79,8 @@ biocLite("phyloseq") # Installs phyloseq
 
 If this doesn't work you can try other methods. Methods for [DADA2](https://benjjneb.github.io/dada2/dada-installation.html) and [Phyloseq](https://joey711.github.io/phyloseq/install.html). <br>  If you don't succeed, we'll help you out on the first morning of the workshop.
 
+*** 
+
 # Vignettes 
 
 Some packages include vignettes which are documents explaining the pipeline. Use the vignette() function 
@@ -78,6 +89,7 @@ library(dada2) # Loads the DADA2 package in the environment
 vignette("dada2")
 ```
 
+*** 
 
 # Getting specific information on a package or function
 
@@ -107,8 +119,65 @@ library(dada2) # Loads the DADA2 package in the environment
 filterAndTrim
 ```
 <br>
-[Reference3](https://www.r-project.org/help.html)
+[Reference 3](https://www.r-project.org/help.html)
 
+*** 
+
+# Setting and checking your directory
+
+Whenever you're launching R, it selects a default directory (i.e a file in which you can save your script, your objects). The function **getwd()** will give you the path to the directory you are in. In order to change it, the function **setwd()** is used. You have to specify the path to the directory you want. Another usefull function is **list.files()** which will return all the files present in the directory you're in. 
+
+```{r dir , eval=FALSE}
+getwd()
+setwd("/Users/Jack/Documents/BIOME/")
+list.files()
+```
+
+*** 
+
+# Saving and loading your objects
+
+When you run a pipeline or analysis, it is convenient to save the objects such as matrices or dataframes. By doing so, you won't have to run your analysis every single time you want to view the object in question.
+In order to save an object the function **saveRDS()** can be used. The object can then be opened with the **readRDS()** function. This pair of functions are an alternative to the **save()** and **load()**. Their adventage is to allow the user to give a new name to the saved object when they load it.  
+
+```{r save , eval=FALSE}
+mat <- matrix(sample(0:1, 12, replace=TRUE),3,4) # A 3 by 4 matrix containing 0s and 1s
+saveRDS(mat, "Neo") # Save mat with Neo as a file name 
+the.matrix <- readRDS("Neo") # Load the file Neo but it will no longer be named mat but the.matrix in your environment
+identical(mat, the.matrix ) # Checks if mat and my.matrix are identical
+```
+<br>
+<center>
+
+![](https://media.giphy.com/media/uPnKU86sFa2fm/giphy.gif)
+
+</center>
+
+<br>
+However if you want to save multiple objects at a time you'll have to use **save()**
+<br> <br>
+[Reference 4](https://www.fromthebottomoftheheap.net/2012/04/01/saving-and-loading-r-objects/)
+
+*** 
 
 # Mike Love's Bioconductor "Refcard"
 [Refcard](https://github.com/mikelove/bioc-refcard)
+
+# Subsampling your data
+
+The more data you have, the slower your analysis are going to run. Therefore, it can be wise to subsample your data for this workshop. To do so, you can use the following script *on the terminal* (bash).  Concretely, it first downloads, the seqtk program. Place the program in the file where your fastq files are stored. Then you'll use a loop in order to subsample reads within each sample
+
+```{r subs , eval=FALSE}
+git clone https://github.com/lh3/seqtk.git;
+cd seqtk; make
+
+for i in {1..10} ; # For sample 1 to sample 10 (you can adjust this to the number of samples you have)
+do 
+./seqtk sample -s100 Sample${i}_R1.fastq 500 > subsample${i}_R1.fastq ; 
+#Takes 500 random reads in Sample${i}_R1.fastq and places them in the subsample${i}_R1.fastq file. Likewise you can adjust 500 to the number of reads you want to keep per sample. 
+./seqtk sample -s100 Sample${i}_R2.fastq 500 > subsample${i}_R2.fastq ; 
+# Same thing as above but for the reverse / R2 reads. It will take the reverse reads corresponding to the forward reads that have been selected above.
+done
+
+```
+
