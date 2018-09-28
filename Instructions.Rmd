@@ -160,6 +160,32 @@ However if you want to save multiple objects at a time you'll have to use **save
 
 *** 
 
+# The S4 object system
+
+Phyloseq uses the S4 object system, which is one of the oriented object systems used in R. This system requires a bit of explanation. An S4 object (S4O) can be seen as multiple objects regrouped into one entity. Each object within the S4O has a class by three properties:
+a name, 
+a representation giving their names and classes for example a car class would have representation(brand="character", horsepower="numeric")
+a charactor vector of classes that this class contains
+The class is created with the function **setClass()**
+
+```{r class , eval=FALSE}
+setClass("Person", representation(name = "character", age = "numeric"))
+setClass("Employee", representation(boss = "Person"), contains = "Person")
+```
+
+a new object within the class is created with **new()**
+```{r class , eval=FALSE}
+Neo <- new("Person", name="Neo", age = 31)
+```
+
+To access slots of an S4 object, you'll need to use **@** and not **$**. The **getSlots()**
+
+```{r age , eval=FALSE}
+Neo@age
+```
+[Reference 5](http://adv-r.had.co.nz/S4.html)
+*** 
+
 # Subsampling your data
 
 The more data you have, the slower your analysis are going to run. Therefore, it can be wise to subsample your data for this workshop. To do so, you can use the following script *on the terminal* (bash).  Concretely, it first downloads, the seqtk program. Place the program in the file where your fastq files are stored. Then you'll use a loop in order to subsample reads within each sample
