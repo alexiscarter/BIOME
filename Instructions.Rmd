@@ -174,16 +174,19 @@ setClass("Employee", representation(boss = "Person"), contains = "Person")
 ```
 
 a new object within the class is created with **new()**
-```{r class , eval=FALSE}
+```{r new , eval=FALSE}
 Neo <- new("Person", name="Neo", age = 31)
 ```
 
-To access slots of an S4 object, you'll need to use **@** and not **$**. The **getSlots()**
+To access slots of an S4 object, you'll need to use **\@** and not **$**. The **getSlots()** returns a descritpion of the slots of a class. 
 
-```{r age , eval=FALSE}
+```{r slots , eval=FALSE}
 Neo@age
+getSlots("Person")
 ```
+
 [Reference 5](http://adv-r.had.co.nz/S4.html)
+
 *** 
 
 # Subsampling your data
