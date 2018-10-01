@@ -13,8 +13,13 @@ output:
 
 # R Update
 
-We will mainly use two packages during this workshop: [DADA2](https://benjjneb.github.io/dada2/index.html) and [Phyloseq](https://joey711.github.io/phyloseq/index.html). It is recommanded that you update your R software in order that these packages run smoothly. Indeed, in order to install DADA2, you must have R version **3.5.0 or newer**, and Bioconductor version 3.7. Using Bioconductor is the easiest way to install both DADA2 and Phyloseq.
+We will mainly use two packages during this workshop: [DADA2](https://benjjneb.github.io/dada2/index.html) and [Phyloseq](https://joey711.github.io/phyloseq/index.html). It is recommanded that you update your R software in order that these packages run smoothly. Indeed, in order to install DADA2, you must have R version **3.5.0 or newer**, and Bioconductor version 3.7. Using Bioconductor is the easiest way to install both DADA2 and Phyloseq. You can check your actual  R version by executing the **version** command in R. 
 
+```{r version, eval=FALSE}
+version
+```
+
+If your version is older than 3.5 follow the next steps, if not skip to the <span style="color:red"> Installing the packages</span> section. 
 
 *** 
 
@@ -38,8 +43,8 @@ updateR(admin_password = 'Admin user password')
 ```
 In order to migrate your packages from your old version to the new one:
 Follow this path:
-/Library/Frameworks/R.framework/Versions/
-(/Bibliothèque/Frameworks/R.framework/Versions/) for the french speakers
+/Library/Frameworks/R.framework/Versions/ or 
+/Bibliothèque/Frameworks/R.framework/Versions/ for the french speakers. 
 Change the folder's name to the 3.5.1 (latest R version).
 
 You then want to update your packages using this command.
@@ -191,10 +196,10 @@ getSlots("Person")
 
 # Subsampling your data
 
-The more data you have, the slower your analysis are going to run. Therefore, it can be wise to subsample your data for this workshop. To do so, you can use the following script *on the terminal* (bash).  Concretely, it first downloads, the seqtk program. Place the program in the file where your fastq files are stored. Then you'll use a loop in order to subsample reads within each sample
+The more data you have, the slower your analyses are going to run. Therefore, it can be wise to subsample your data for this workshop. To do so, you can use the following script **on the terminal**. It first downloads the seqtk program. Place the program in the file where your fastq files are stored. Then you'll use a loop in order to subsample reads within each sample. For the script to work your samples have to be named as such: SampleX_R1.fastq and SampleX_R2.fastq, X being a number identifying your samples. You will have to modify either the script or the names of your samples if they follow a different annotation. The subsampled reads will be placed in files named subsampleX_R1.fastq and subsampleX_R2.fastq (X being a number identifying your samples).
 
 ```{r subs , eval=FALSE}
-git clone https://github.com/lh3/seqtk.git;
+git clone https://github.com/lh3/seqtk.git; # Downloads the seqtk program
 cd seqtk; make
 
 for i in {1..10} ; # For sample 1 to sample 10 (you can adjust this to the number of samples you have)
@@ -204,7 +209,6 @@ do
 ./seqtk sample -s100 Sample${i}_R2.fastq 500 > subsample${i}_R2.fastq ; 
 # Same thing as above but for the reverse / R2 reads. It will take the reverse reads corresponding to the forward reads that have been selected above.
 done
-
 ```
 
 # Mike Love's Bioconductor "Refcard"
