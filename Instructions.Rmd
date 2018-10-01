@@ -19,7 +19,7 @@ We will mainly use two packages during this workshop: [DADA2](https://benjjneb.g
 version
 ```
 
-If your version is older than 3.5 follow the next steps, if not skip to the <span style="color:red"> Installing the packages</span> section. 
+If your version is older than 3.5, follow the next steps. If not, skip to the <span style="color:red"> Installing the packages</span> section. 
 
 *** 
 
