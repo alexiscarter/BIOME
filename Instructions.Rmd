@@ -190,6 +190,15 @@ Neo@age
 getSlots("Person")
 ```
 
+The following commands are used for S4 generic functions rather than the usual `?` or `help` calls:
+
+```{r helpS4 , eval=FALSE}
+getMethod(method,"Person")  # prints source code for method
+selectMethod(method, "Person") # will climb the inheritance to find method
+showMethods(classes="Person") # show all methods for class
+```
+
+
 [Reference 5](http://adv-r.had.co.nz/S4.html)
 
 *** 
