@@ -1,0 +1,30 @@
+---
+title: "Lab 6: Ordinations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We'll work with the `GlobalPatterns` dataset from the phyloseq package.
+
+```{r}
+library(phyloseq); packageVersion("phyloseq")
+data(GlobalPatterns)
+GP <- GlobalPatterns # For shorthand
+```
+
+We've discussed the community distance/dissimilarity and ordination capabailities of phyloseq.
+
+- Create an ordination of all the samples, colored by sample type.
+- Create an ordination of just the water samples.
+- How does an ordination based on the weighted unifrac distance compared to the unweighted unifrac?
+- How about unifrac versus bray-curtis?
+- How many dimensions are needed to capture the distances between these samples?
+- Try a few different ordination methods.
+
+Feel free to work on your own data as well.
+
+Useful functions will include: `distance`, `ordinate`, `plot_ordination`, `plot_scree`, and more.
+

@@ -1,0 +1,28 @@
+---
+title: "Lab 5: Phyloseq manipulations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We'll work with the `GlobalPatterns` dataset from the phyloseq package.
+
+```{r}
+library(phyloseq); packageVersion("phyloseq")
+data(GlobalPatterns)
+GP <- GlobalPatterns # For shorthand
+```
+
+We've discussed the descriptors, accessors, subsetting and transformation available through phyloseq. Let's put those to work, and answer the following questions.
+
+- How many samples from each sample type?
+- How many OTUs have abundance > 100
+- How many Phylum:Bacteroidetes OTUs were present in water samples?
+- Which sample type had the highest amount of Genus:Escherichia?
+- How many OTUs were present in 3+ samples?
+
+Feel free to work on your own data as well.
+
+Useful functions may include: `subset_samples`, `subset_taxa`, `prune_taxa`, `sample_sums`, `taxa_sums`, `ntaxa`, and more.
