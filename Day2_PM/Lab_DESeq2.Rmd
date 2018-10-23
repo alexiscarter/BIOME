@@ -1,0 +1,63 @@
+---
+title: "Differential Abundance Testing"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We'll look into using DESeq2 to test for differential abundance in a phyloseq object, as introduced in [this vignette](https://bioconductor.org/packages/devel/bioc/vignettes/phyloseq/inst/doc/phyloseq-mixture-models.html)
+
+The data are from a public dataset on [colorectal
+cancer](http://genome.cshlp.org/content/22/2/292.long).
+
+First we download and load the data.
+
+```{r libraries}
+library("phyloseq")
+filepath = system.file("extdata", "study_1457_split_library_seqs_and_mapping.zip", package="phyloseq")
+kostic = microbio_me_qiime(filepath)
+head(sample_data(kostic)$DIAGNOSIS, 10)
+```
+
+We're interested in whether some species are more or less abundant in healthy
+vs. tumor samples.
+
+```{r subset}
+kostic <- subset_samples(kostic, DIAGNOSIS != "None")
+kostic <- prune_samples(sample_sums(kostic) > 500, kostic)
+kostic
+
+kostic_dds <- phyloseq_to_deseq2(kostic, ~ DIAGNOSIS)
+kostic_dds
+```
+
+This single function does all the estimation and inference. Note that it
+transforms the `kostic_dds` object in place.
+
+```{r}
+library("DESeq2")
+kostic_dds <- DESeq(kostic_dds, fitType = "local", sfType = "iterate")
+```
+
+Can you inspect the results?
+
+* Produce an MA plot of species-wise effects.
+* Produce a plot of the estimated dispersions. Which dispersions are not shrunk?
+* Make a histogram of the estimated size factors.
+* Which species are most significantly associated with colorectal cancer?
+* Experiment with different dispersion and size factor estimation methods. How
+  sensitive are the results?
+  
+Some functions that might be useful, `results()`, `plotDispEsts()`, `plotMA()`,
+`colData()`, `design()`....
+
+Bonus questions,
+* Maybe we want to control for radiation therapy when testing for the
+  association. Figure out how to modify the design matrix to accomodate this.
+* Read about "Heavy-tailed prior distributions for sequence count data: removing
+  the noise and preserving large differences" and how to implement that approach
+  in our kostic analysis.
+* Read about independent hypothesis weighting as an alternative to simple
+  Benjamini-Hochberg, and how to impelment that using DESeq2.
