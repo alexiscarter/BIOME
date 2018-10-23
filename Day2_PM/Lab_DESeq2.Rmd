@@ -38,7 +38,7 @@ transforms the `kostic_dds` object in place.
 
 ```{r}
 library("DESeq2")
-kostic_dds <- DESeq(kostic_dds, fitType = "local", sfType = "iterate")
+kostic_dds <- DESeq(kostic_dds, fitType = "local", sfType = "poscounts")
 ```
 
 Can you inspect the results?
