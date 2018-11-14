@@ -15,7 +15,7 @@ output: slidy_presentation
 2. Filter and Trim
 3. Learn Error Rates
 4. Denoise/Sample Inference
-5. Make Sequence Table
+5. Merge (if paired-end)
 6. Remove Chimeras
 7. Assign Taxonomy
 
@@ -302,6 +302,15 @@ mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE)
 ```
 
 **Most reads should pass the merging step! If that isn't the case, are you sure your truncated reads still overlap sufficiently?**
+
+## Merging options
+
+![](media/merging_scenarios.png){width=960px} 
+
+- If (a): Use normally.
+- If (b or a+b): `mergePairs(..., trimOverhang=TRUE)` *(but you probably should have trimmed away the overhang earlier, see ITS workflow)*
+- If (c): `mergePairs(..., justConcatenate=TRUE)`.
+- If (a+c or a+b+c): Trouble.
 
 ## Construct Sequence Table (ASV Table)
 
